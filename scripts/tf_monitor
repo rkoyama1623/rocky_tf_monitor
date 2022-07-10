@@ -216,7 +216,7 @@ class ViewerConsole(ViewerInterface):
 
     def write_labels(self):
         self.stdscr.addstr(0,  0, '{:^37}|{:^26}|{:^6}|{:<20}'.format(
-        'Frame ID', 'Stamp Difference [sec]', 'Freq', 'Topic'), curses.A_UNDERLINE)
+        'Frame ID', 'Stamp Difference [sec]', 'Freq', ' Node'), curses.A_UNDERLINE)
         self.stdscr.addstr(1,  0, '{:^18}|{:^18}|{:^8}|{:^8}|{:^8}|{:^6}|{:<20}'.format(
         'from', 'to', 'latest', 'min', 'max', '[Hz]', ''), curses.A_UNDERLINE)
 
