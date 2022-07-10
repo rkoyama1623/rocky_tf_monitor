@@ -21,7 +21,7 @@ $ rosrun tf_monitor tf_monitor
 
 ![screenshot.png](doc/screenshot.png)
 
-In this demo, invalid /tf topic is demonstrated.
+In this demo, invalid /tf topic is demonstrated.  
 Although node `/odom_pub` publish tf message from `odom` to `base_footprint`,  
 `bug_node` also publish tf message from `map` to `base_footprint`.  
 We cannot find these kind of problem with rqt_tf_tree.  
