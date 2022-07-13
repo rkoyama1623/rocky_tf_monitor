@@ -226,18 +226,20 @@ class ViewerConsole(ViewerInterface):
         -----------
         data : {FromTo: {PublisherName : TfStatistics}}
         '''
-        # Check multiple parent
         size = self.get_data_size(data)
+        data = OrderedDict(sorted(data.iteritems(), key=lambda item: item[0].frm))
         max_row, max_col = self.stdscr.getmaxyx()
         self.write_labels()
         row = 1
         self.process_keyboard(size)
         self.stdscr.clear()
-        parent_dict = self.generate_parent_dict(data)
+        parent_dict = self.generate_parent_dict(data) # Check multiple parent
         for i, (ft, ft_data) in enumerate(data.items()):
             if i < self.top_index:
                 continue
             color = self.colors['white']
+            if len(data[ft]) > 1:
+                color = self.colors['yellow']
             if len(parent_dict[ft.to]) > 1:
                 color = self.colors['red']
             for pub, stat in ft_data.items():
@@ -246,13 +248,13 @@ class ViewerConsole(ViewerInterface):
                     self.stdscr.refresh()
                     return
                 if stat.static:
-                    output = '{:<18}|{:<18}|{:=+.1e}|{:=+.1e}|{:=+.1e}| {:=4.1f} |{}'.format(
+                    output = '{:<18}|{:<18}|{:=+.1e}|{:=+.1e}|{:=+.1e}|{:^6.1f}|{}'.format(
                         ft.frm, ft.to,
                         stat.stamp_diff_latest, stat.stamp_diff_min, stat.stamp_diff_max,
                         1./(stat.curr_recieved_stamp - stat.prev_recieved_stamp).to_sec(),
                         pub)
                 else:
-                    output = '{:<18}|{:<18}|{:=+8.3f}|{:=+8.3f}|{:=+8.3f}| {:=4.1f} |{}'.format(
+                    output = '{:<18}|{:<18}|{:=+8.3f}|{:=+8.3f}|{:=+8.3f}|{:^6.1f}|{}'.format(
                         ft.frm, ft.to,
                         stat.stamp_diff_latest, stat.stamp_diff_min, stat.stamp_diff_max,
                         1./(stat.curr_recieved_stamp - stat.prev_recieved_stamp).to_sec(),
