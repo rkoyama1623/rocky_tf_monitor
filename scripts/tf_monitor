@@ -248,13 +248,13 @@ class ViewerConsole(ViewerInterface):
                     self.stdscr.refresh()
                     return
                 if stat.static:
-                    output = '{:<18}|{:<18}|{:=+.1e}|{:=+.1e}|{:=+.1e}|{:^6.1f}|{}'.format(
+                    output = '{:<18}|{:<18}|{:=+.1e}|{:=+.1e}|{:=+.1e}|{:6.1f}|{}'.format(
                         ft.frm, ft.to,
                         stat.stamp_diff_latest, stat.stamp_diff_min, stat.stamp_diff_max,
                         1./(stat.curr_recieved_stamp - stat.prev_recieved_stamp).to_sec(),
                         pub)
                 else:
-                    output = '{:<18}|{:<18}|{:=+8.3f}|{:=+8.3f}|{:=+8.3f}|{:^6.1f}|{}'.format(
+                    output = '{:<18}|{:<18}|{:=+8.3f}|{:=+8.3f}|{:=+8.3f}|{:6.1f}|{}'.format(
                         ft.frm, ft.to,
                         stat.stamp_diff_latest, stat.stamp_diff_min, stat.stamp_diff_max,
                         1./(stat.curr_recieved_stamp - stat.prev_recieved_stamp).to_sec(),
