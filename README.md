@@ -3,7 +3,7 @@
 ## What is this?
 
 This is a debug tool to monitor ROS tf topic.
-[Geometry2](https://github.com/ros/geometry2) is an ausome library to handle geometric transformations with time stamp,
+[Geometry2](https://wiki.ros.org/geometry2) is an ausome library to handle geometric transformations with time stamp,
 and tf and tf2 is a core library of geometry2.  
 
 When utilizing tf/tf2, the following points should be noted.
@@ -16,13 +16,13 @@ This ROS package provides a means of checking to see if any of the above problem
 ## Demo
 
 ```bash
-$ roslaunch tf_monitor demo.launch
-$ rosrun tf_monitor tf_monitor
+roslaunch tf_monitor demo.launch
+rosrun tf_monitor tf_monitor
 ```
 
 ![screenshot.png](doc/screenshot.png)
 
-In this demo, invalid `/tf` topic is demonstrated. Although node `/odom_pub` publish tf message for `base_footprint` coordinate frame in `odom` coordinate frame, `bug_node` also publish tf message for `base_footprint` coordinate frame in `map` coordinate frame. We cannot find these kind of problem with rqt_tf_tree. By `tf_monitor` we can confirm `base_footprint` have two parent frame, which is indicated by red line.
+In this demo, invalid `/tf` topic is demonstrated. Although node `/odom_pub` publish `base_footprint` coordinate frame in `odom` coordinate frame, `bug_node` also publish `base_footprint` coordinate frame in `map` coordinate frame. [rqt_tf_tree](https://wiki.ros.org/rqt_tf_tree) cannot deal with these kind of problem. By `tf_monitor` we can confirm `base_footprint` have two parent frame, which is indicated by red line.
 
 ## How to build
 
