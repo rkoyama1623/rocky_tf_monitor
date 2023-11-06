@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-import os
 import sys
-import threading
-import Queue as queue
-import optparse
+if sys.version_info.major == 2:
+    import Queue as queue
+else:
+    import queue
 import rospy
 import time
 import curses
 from collections import OrderedDict
 
 from tf2_msgs.msg import TFMessage
+
+
 class TfMonitor(object):
     '''
     Attributes
@@ -79,6 +81,7 @@ class TfMonitor(object):
         received_stamp = rospy.Time.from_sec(time.time())
         self.msgs.put((received_stamp, msg, static))
 
+
 class FromTo(object):
     '''
     Parameters
@@ -102,13 +105,16 @@ class FromTo(object):
     def __repr__(self):
         return '{:20} -> {:20}'.format(self.frm, self.to)
 
+
 class PublisherName(str):
     @classmethod
     def from_msg(cls, msg):
         return cls(msg._connection_header['callerid'])
 
+
 def get_standard_stamp():
     return rospy.Time.now()
+
 
 class TransformStatictics(object):
     def __init__(self, recieved_stamp, msg, static=False):
@@ -143,6 +149,7 @@ class TransformStatictics(object):
         self.stamp_diff_ave    = self.stamp_diff_latest
         self.n                 = 1
         self.msg = msg
+
     def update(self, recieved_stamp, msg, static=False):
         assert self.frm == msg.header.frame_id
         assert self.to  == msg.child_frame_id
@@ -159,9 +166,11 @@ class TransformStatictics(object):
         self.stamp_diff_min    = min(self.stamp_diff_latest, self.stamp_diff_min)
         self.stamp_diff_ave    += (self.stamp_diff_latest - self.stamp_diff_ave)/self.n
 
+
 class ViewerInterface(object):
     def __init__(self):
         pass
+
     def show(self, data):
         '''
         data : {FromTo: {PublisherName : TfStatistics}}
@@ -183,8 +192,7 @@ class ViewerInterface(object):
     def close(self):
         pass
 
-import curses
-from collections import OrderedDict
+
 class ViewerConsole(ViewerInterface):
     def __init__(self):
         self.top_index = 0
@@ -275,7 +283,7 @@ class ViewerConsole(ViewerInterface):
         '''
         d = {}
         for ft in data:
-            if not ft.to in d:
+            if ft.to not in d:
                 d[ft.to] = [ft.frm]
             else:
                 d[ft.to].append(ft.frm)
@@ -301,9 +309,11 @@ class ViewerConsole(ViewerInterface):
         elif (key == ord('q')):
             exit(0)
 
+
 def main():
     checker = TfMonitor()
     checker.main()
+
 
 if __name__ == '__main__':
     rospy.init_node("tf_monitor", log_level=rospy.INFO)
