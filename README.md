@@ -22,10 +22,7 @@ $ rosrun tf_monitor tf_monitor
 
 ![screenshot.png](doc/screenshot.png)
 
-In this demo, invalid `/tf` topic is demonstrated.
-Although node `/odom_pub` publish tf message from `odom` to `base_footprint`, `bug_node` also publish tf message from `map` to `base_footprint`.
-We cannot find these kind of problem with rqt_tf_tree.
-By `tf_monitor` we can confirm `base_footprint` have two parent frame, which is indicated by red line.
+In this demo, invalid `/tf` topic is demonstrated. Although node `/odom_pub` publish tf message for `base_footprint` coordinate frame in `odom` coordinate frame, `bug_node` also publish tf message for `base_footprint` coordinate frame in `map` coordinate frame. We cannot find these kind of problem with rqt_tf_tree. By `tf_monitor` we can confirm `base_footprint` have two parent frame, which is indicated by red line.
 
 ## How to build
 
