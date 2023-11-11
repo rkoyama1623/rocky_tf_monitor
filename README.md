@@ -1,4 +1,4 @@
-# tf_monitor
+# rocky_tf_monitor
 
 ## What is this?
 
@@ -16,28 +16,28 @@ This ROS package provides a means of checking to see if any of the above problem
 ## Demo
 
 ```bash
-roslaunch tf_monitor demo.launch
-rosrun tf_monitor tf_monitor
+roslaunch rocky_tf_monitor demo.launch
+rosrun rocky_tf_monitor rocky_tf_monitor
 ```
 
 ![screenshot.png](doc/screenshot.png)
 
-In this demo, invalid `/tf` topic is demonstrated. Although node `/odom_pub` publish `base_footprint` coordinate frame in `odom` coordinate frame, `bug_node` also publish `base_footprint` coordinate frame in `map` coordinate frame. [rqt_tf_tree](https://wiki.ros.org/rqt_tf_tree) cannot deal with these kind of problem. By `tf_monitor` we can confirm `base_footprint` has two parent frame, which is indicated by red line.
+In this demo, invalid `/tf` topic is demonstrated. Although node `/odom_pub` publish `base_footprint` coordinate frame in `odom` coordinate frame, `bug_node` also publish `base_footprint` coordinate frame in `map` coordinate frame. [rqt_tf_tree](https://wiki.ros.org/rqt_tf_tree) cannot deal with these kind of problem. By `rocky_tf_monitor` we can confirm `base_footprint` has two parent frame, which is indicated by red line.
 
 ## How to build
 
 ```bash
 cd /path/to/catkin_ws/src
-git clone https://github.com/rkoyama1623/tf_monitor.git
-rosdep install --from-path tf_monitor -iry
-cd tf_monitor
+git clone https://github.com/rkoyama1623/rocky_tf_monitor.git
+rosdep install --from-path rocky_tf_monitor -iry
+cd rocky_tf_monitor
 catkin build --this
 ```
 
 ## How to use
 
 ```bash
-rosrun tf_monitor tf_monitor
+rosrun rocky_tf_monitor rocky_tf_monitor
 ```
 
 ## License
